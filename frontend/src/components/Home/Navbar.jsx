@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { LogOut, Search } from 'lucide-react';
+import { ChevronDown, LogOut, Search } from 'lucide-react';
 import { logout } from '../../redux/slices/authSlice';
 import { fetchVideos } from '../../redux/slices/videoSlice';
 
 const Navbar = ({ user, isAuthenticated }) => {
     const dispatch = useDispatch();
+    const [showLogoutMenu, setShowLogoutMenu] = useState(false);
+    const menuRef = useRef(null);
 
     const handleSearch = (e) => {
         if (e.key === 'Enter') {
             dispatch(fetchVideos({ search: e.target.value }));
         }
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (menuRef.current && !menuRef.current.contains(e.target)) {
+                setShowLogoutMenu(false);
+            }
+        };
+        if (showLogoutMenu) document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [showLogoutMenu]);
+
+    const handleLogout = () => {
+        setShowLogoutMenu(false);
+        dispatch(logout());
     };
 
     return (
@@ -29,15 +46,25 @@ const Navbar = ({ user, isAuthenticated }) => {
                     />
                 </div>
                 {isAuthenticated ? (
-                    <div className="navbar__user">
+                    <div className="navbar__user" ref={menuRef}>
                         <span className="navbar__username">{user?.full_name}</span>
                         <button
-                            onClick={() => dispatch(logout())}
+                            onClick={() => setShowLogoutMenu(!showLogoutMenu)}
                             className="navbar__logout-btn"
-                            aria-label="Logout"
+                            aria-label="Account menu"
                         >
-                            <LogOut size={20} />
+                            <ChevronDown size={20} />
                         </button>
+                        {showLogoutMenu && (
+                            <div className="navbar__dropdown">
+                                <button
+                                    onClick={handleLogout}
+                                    className="navbar__dropdown-logout"
+                                >
+                                    <LogOut size={18} /> Logout
+                                </button>
+                            </div>
+                        )}
                     </div>
                 ) : (
                     <Link to="/login" className="btn-primary navbar__signin-link">
