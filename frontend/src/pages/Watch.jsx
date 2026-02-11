@@ -87,7 +87,6 @@ const Watch = () => {
                         'durationDisplay',
                         'progressControl',
                         'remainingTimeDisplay',
-                        'customQualityButton', // Our custom button
                         'fullscreenToggle'
                     ]
                 },
@@ -108,41 +107,6 @@ const Watch = () => {
             videoContainerRef.current.appendChild(videoElement);
 
             const player = playerRef.current = videojs(videoElement, videoJsOptions);
-
-            // --- ADD CUSTOM QUALITY BUTTON TO CONTROL BAR ---
-            const Button = videojs.getComponent('Button');
-            const QualityButton = videojs.extend(Button, {
-                constructor: function () {
-                    Button.apply(this, arguments);
-                    this.addClass('vjs-quality-button');
-                    this.controlText('Quality');
-                },
-                handleClick: function () {
-                    setShowQualityMenu(prev => !prev);
-                },
-                createEl: function () {
-                    const el = Button.prototype.createEl.call(this, 'button', {
-                        className: 'vjs-quality-button vjs-control vjs-button'
-                    });
-
-                    el.innerHTML = `
-                        <span class="vjs-icon-placeholder" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="3"/>
-                                <path d="M12 1v6m0 6v6"/>
-                                <path d="M21 12h-6m-6 0H3"/>
-                            </svg>
-                        </span>
-                        <span class="vjs-control-text">Quality Settings</span>
-                    `;
-
-                    settingsButtonRef.current = el;
-                    return el;
-                }
-            });
-
-            videojs.registerComponent('customQualityButton', QualityButton);
-            player.getChild('controlBar').addChild('customQualityButton', {}, 7);
 
             // --- QUALITY DETECTION LOGIC ---
             const qualityLevels = player.qualityLevels();
