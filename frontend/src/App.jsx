@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ErrorPage from './pages/Error';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkAuth } from './redux/slices/authSlice';
 
@@ -27,6 +28,7 @@ function App() {
             <Routes>
                 <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/" />} />
                 <Route path="/register" element={!isAuthenticated ? <Register /> : <Navigate to="/" />} />
+                <Route path="/error" element={<ErrorPage />} />
 
                 <Route path="/" element={<Home />} />
 
