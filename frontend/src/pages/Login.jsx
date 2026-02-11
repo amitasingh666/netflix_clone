@@ -78,8 +78,8 @@ const Login = () => {
                     <div className="auth-or-divider">OR</div>
 
                     <div className="social-login">
-                        <a href="http://localhost:5000/api/auth/google" className="btn-social">Google</a>
-                        <a href="http://localhost:5000/api/auth/github" className="btn-social">GitHub</a>
+                        <a href="http://localhost:5000/api/auth/google" className="btn-social">Continue with Google</a>
+                        <a href="http://localhost:5000/api/auth/github" className="btn-social">Continue with GitHub</a>
                     </div>
 
                     <div className="auth-footer">

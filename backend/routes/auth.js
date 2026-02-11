@@ -16,8 +16,11 @@ router.post('/login', login);
 router.post('/logout', logout);
 router.get('/me', getCurrentUser);
 
-// Google OAuth
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+// Google OAuth (force account selection each time)
+router.get('/google', passport.authenticate('google', {
+    scope: ['profile', 'email'],
+    prompt: 'select_account'
+}));
 router.get(
     '/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),

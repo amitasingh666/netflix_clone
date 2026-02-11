@@ -45,8 +45,9 @@ const Register = () => {
             return;
         }
 
-        if (password.length < 6) {
-            setLocalError('Password must be at least 6 characters');
+        const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
+        if (!strongPasswordRegex.test(password)) {
+            setLocalError('Password must be at least 8 characters, include uppercase, lowercase, number, and special char (!@#$%^&*)');
             return;
         }
 
@@ -80,6 +81,13 @@ const Register = () => {
                     <button className="btn-primary auth-btn" type="submit" disabled={isLoading}>
                         {isLoading ? 'Creating Account...' : 'Sign Up'}
                     </button>
+
+                    <div className="auth-or-divider">OR</div>
+
+                    <div className="social-login">
+                        <a href="http://localhost:5000/api/auth/google" className="btn-social">Continue with Google</a>
+                        <a href="http://localhost:5000/api/auth/github" className="btn-social">Continue with GitHub</a>
+                    </div>
 
                     <div className="auth-footer">
                         Already have an account? <Link to="/login" className="auth-link">Sign in now.</Link>

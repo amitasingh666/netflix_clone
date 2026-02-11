@@ -16,8 +16,9 @@ async function register(req, res) {
         errors.push({ msg: 'Please enter a valid email address' });
     }
 
-    if (password.length < 6) {
-        errors.push({ msg: 'Password must be at least 6 characters' });
+    const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
+    if (!strongPasswordRegex.test(password)) {
+        errors.push({ msg: 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*)' });
     }
 
     if (errors.length > 0) {
