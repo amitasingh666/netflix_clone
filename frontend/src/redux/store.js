@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from '../features/auth/authSlice';
-import videoReducer from '../features/videos/videoSlice';
+import authReducer from './slices/authSlice';
+import videoReducer from './slices/videoSlice';
 
 export const store = configureStore({
     reducer: {

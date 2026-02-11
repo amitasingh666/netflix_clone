@@ -1,0 +1,427 @@
+/* ========================================
+   WATCH PAGE
+   ======================================== */
+.watch-page {
+    background: #000;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+}
+
+/* --- Player Sizing --- */
+.watch-page .video-js {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.watch-page .vjs-tech {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* --- Video Container --- */
+.watch-page__player-container {
+    width: 100%;
+    height: 100%;
+}
+
+/* --- Overlay Button (Back / Settings) --- */
+.watch-page__overlay-btn {
+    position: absolute;
+    z-index: 100;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    padding: 12px;
+    transition: all 0.3s;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.watch-page__overlay-btn:hover {
+    background: rgba(229, 9, 20, 0.9);
+}
+
+.watch-page__back-btn {
+    top: 20px;
+    left: 20px;
+}
+
+.watch-page__settings-btn {
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+/* --- Quality Menu --- */
+.quality-menu {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.95);
+    border-radius: 8px;
+    padding: 8px 0;
+    min-width: 220px;
+    max-height: 400px;
+    overflow-y: auto;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 200;
+    animation: slideUp 0.2s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.quality-menu__header {
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: 6px;
+    color: #aaa;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.quality-menu__current {
+    padding: 8px 16px;
+    color: #e50914;
+    font-size: 0.85rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.quality-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+
+.quality-item:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.quality-item--active {
+    color: #e50914;
+    font-weight: 600;
+    background: rgba(229, 9, 20, 0.2);
+    border-left-color: #e50914;
+}
+
+.quality-item--inactive {
+    color: white;
+    font-weight: 400;
+    background: transparent;
+}
+
+.quality-item__sublabel {
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 2px;
+}
+
+.quality-menu__empty {
+    padding: 20px 16px;
+    color: #999;
+    font-size: 0.9rem;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.quality-menu__empty-sub {
+    font-size: 0.75rem;
+}
+
+/* --- Loading / Error States --- */
+.watch-page__error {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    background: #000;
+}
+
+.watch-page__error-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #e50914;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
+.watch-page__error-btn:hover {
+    background: #f40612;
+}
+
+.watch-page__loading {
+    color: white;
+    text-align: center;
+    margin-top: 20%;
+    font-size: 1.2rem;
+}
+
+.watch-page__spinner {
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top: 4px solid #e50914;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+/* --- Hide default quality selector --- */
+.vjs-quality-selector {
+    display: none !important;
+}
+
+/* ========================================
+   VIDEO UPLOAD PAGE
+   ======================================== */
+.upload-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    padding: 40px 20px;
+}
+
+.upload-page__container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.upload-page__header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.upload-page__title {
+    color: white;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.upload-page__label {
+    display: block;
+    color: #aaa;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.upload-page__field {
+    margin-bottom: 24px;
+}
+
+.upload-page__field--last {
+    margin-bottom: 32px;
+}
+
+/* --- Dropzone --- */
+.upload-page__dropzone {
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: transparent;
+}
+
+.upload-page__dropzone--active {
+    background: rgba(229, 9, 20, 0.1);
+}
+
+.upload-page__dropzone:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.upload-page__dropzone-text {
+    margin: 0;
+}
+
+.upload-page__dropzone-text--active {
+    color: #e50914;
+}
+
+.upload-page__dropzone-text--inactive {
+    color: #999;
+}
+
+.upload-page__dropzone-subtext {
+    color: #666;
+    font-size: 0.85rem;
+    margin-top: 8px;
+}
+
+/* --- Form Inputs --- */
+.upload-page__input,
+.upload-page__textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.upload-page__input:focus,
+.upload-page__textarea:focus {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.upload-page__textarea {
+    resize: vertical;
+}
+
+/* --- Submit --- */
+.upload-page__submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: #e50914;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.upload-page__submit-btn:hover {
+    background: #f40612;
+}
+
+/* --- Upload Status --- */
+.upload-page__status {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.upload-page__status-title {
+    color: white;
+    margin-bottom: 16px;
+}
+
+.upload-page__status-text {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.upload-page__processing-info {
+    margin-top: 24px;
+    padding: 16px;
+    background: rgba(229, 9, 20, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(229, 9, 20, 0.3);
+}
+
+.upload-page__processing-info p {
+    color: #e50914;
+    margin: 0;
+    font-size: 0.85rem;
+}
+
+.upload-page__action-btn {
+    padding: 12px 32px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: filter 0.2s;
+}
+
+.upload-page__action-btn:hover {
+    filter: brightness(1.1);
+}
+
+.upload-page__action-btn--success {
+    background: #4CAF50;
+}
+
+.upload-page__action-btn--error {
+    background: #e50914;
+}
+
+/* --- Auth Error Alerts --- */
+.auth-error-box {
+    background: #e87c03;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    border: 2px solid red;
+}
+
+.auth-or-divider {
+    color: #b3b3b3;
+    font-size: 13px;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.auth-error-box--simple {
+    background: #e87c03;
+    padding: 10px 20px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: white;
+}
+
+/* ========================================
+   SHARED SPINNER
+   ======================================== */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner--loader {
+    animation: spin 1s linear infinite;
+}

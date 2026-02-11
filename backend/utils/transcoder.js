@@ -59,7 +59,10 @@ const transcodeToHLS = async (inputPath, outputDir, videoId) => {
         }
 
         // Create master playlist
-        const masterPlaylist = qualities.map(q => 
+        // HLS best practice: list variants from lowest to highest bandwidth
+        const sortedForManifest = [...qualities].sort((a, b) => a.bandwidth - b.bandwidth);
+
+        const masterPlaylist = sortedForManifest.map(q =>
             `#EXT-X-STREAM-INF:BANDWIDTH=${q.bandwidth},RESOLUTION=${q.size}\n${q.name}.m3u8`
         ).join('\n');
 

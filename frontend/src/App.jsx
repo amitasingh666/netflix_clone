@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkAuth } from './features/auth/authSlice';
+import { checkAuth } from './redux/slices/authSlice';
 
 import Home from './pages/Home';
 import Watch from './pages/Watch';
@@ -19,7 +19,7 @@ function App() {
     }, [dispatch]);
 
     if (isCheckingAuth) {
-        return <div style={{ color: 'white', display: 'flex', justifyContent: 'center', marginTop: '50px' }}>Loading...</div>
+        return <div className="video-details__loading">Loading...</div>
     }
 
     return (

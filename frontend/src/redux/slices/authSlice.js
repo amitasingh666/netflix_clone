@@ -10,7 +10,7 @@ export const login = createAsyncThunk('auth/login', async (userData, thunkAPI) =
         const response = await axios.post(`${API_URL}/login`, userData);
         return response.data.user;
     } catch (error) {
-        const message = 
+        const message =
             (error.response && error.response.data && error.response.data.msg) ||
             error.message ||
             'Login failed';
@@ -21,9 +21,9 @@ export const login = createAsyncThunk('auth/login', async (userData, thunkAPI) =
 export const register = createAsyncThunk('auth/register', async (userData, thunkAPI) => {
     try {
         const response = await axios.post(`${API_URL}/register`, userData);
-        return response.data; 
+        return response.data;
     } catch (error) {
-        const message = 
+        const message =
             (error.response && error.response.data && error.response.data.errors && error.response.data.errors[0].msg) ||
             (error.response && error.response.data && error.response.data.msg) ||
             error.message ||
@@ -40,7 +40,7 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
 export const checkAuth = createAsyncThunk('auth/checkAuth', async (_, thunkAPI) => {
     try {
         const response = await axios.get(`${API_URL}/me`);
-        return response.data; 
+        return response.data;
     } catch (error) {
         return thunkAPI.rejectWithValue(error.response ? error.response.data : 'Network Error');
     }
@@ -53,8 +53,8 @@ const authSlice = createSlice({
     initialState: {
         user: null,
         isAuthenticated: false,
-        isLoading: false,       // Used for button spinners (Login/Register)
-        isCheckingAuth: true,   // NEW: Used ONLY for the initial screen load
+        isLoading: false,
+        isCheckingAuth: true,
         error: null,
     },
     reducers: {
@@ -66,7 +66,7 @@ const authSlice = createSlice({
         builder
             // Login
             .addCase(login.pending, (state) => {
-                state.isLoading = true; // Shows spinner on button, DOES NOT hide page
+                state.isLoading = true;
                 state.error = null;
             })
             .addCase(login.fulfilled, (state, action) => {
@@ -78,7 +78,7 @@ const authSlice = createSlice({
                 state.isLoading = false;
                 state.error = action.payload || "Login failed";
             })
-            
+
             // Register
             .addCase(register.pending, (state) => {
                 state.isLoading = true;
@@ -100,7 +100,7 @@ const authSlice = createSlice({
                 state.isAuthenticated = false;
             })
 
-            // Check Auth (Only this touches isCheckingAuth)
+            // Check Auth
             .addCase(checkAuth.pending, (state) => {
                 state.isCheckingAuth = true;
             })
