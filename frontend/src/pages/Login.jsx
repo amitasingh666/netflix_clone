@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, resetError } from '../redux/slices/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
 
 // Styles
 import '../styles/Watch.css'; // Shared auth error styles
@@ -78,8 +79,8 @@ const Login = () => {
                     <div className="auth-or-divider">OR</div>
 
                     <div className="social-login">
-                        <a href="http://localhost:5000/api/auth/google" className="btn-social">Continue with Google</a>
-                        <a href="http://localhost:5000/api/auth/github" className="btn-social">Continue with GitHub</a>
+                        <a href={`${API_BASE_URL}/api/auth/google`} className="btn-social">Continue with Google</a>
+                        <a href={`${API_BASE_URL}/api/auth/github`} className="btn-social">Continue with GitHub</a>
                     </div>
 
                     <div className="auth-footer">

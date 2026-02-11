@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Upload, Video, CheckCircle, XCircle, Loader } from 'lucide-react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 
 // Styles
 import '../styles/Watch.css'; // Shared styles including upload-page classes
@@ -60,7 +61,7 @@ const VideoUpload = () => {
         });
 
         try {
-            const response = await axios.post('http://localhost:5000/api/upload/upload', formData, {
+            const response = await axios.post(`${API_BASE_URL}/api/upload/upload`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
                 withCredentials: true
             });
@@ -78,7 +79,7 @@ const VideoUpload = () => {
     const pollProcessingStatus = async (videoId) => {
         const interval = setInterval(async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/upload/status/${videoId}`, {
+                const response = await axios.get(`${API_BASE_URL}/api/upload/status/${videoId}`, {
                     withCredentials: true
                 });
 
