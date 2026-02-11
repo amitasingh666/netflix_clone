@@ -35,9 +35,14 @@ async function getVideos(req, res) {
         const params = [];
         const whereConditions = [];
 
-        if (search) {
-            whereConditions.push('(v.title LIKE ? OR v.description LIKE ?)');
-            params.push(`%${search}%`, `%${search}%`);
+        const trimmedSearch = typeof search === 'string' ? search.trim() : '';
+        if (trimmedSearch) {
+            const searchPattern = `%${trimmedSearch.toLowerCase()}%`;
+            // Case-insensitive search on title, description, and tag name
+            whereConditions.push(
+                '(LOWER(v.title) LIKE ? OR LOWER(v.description) LIKE ? OR LOWER(t.name) LIKE ?)'
+            );
+            params.push(searchPattern, searchPattern, searchPattern);
         }
 
         if (whereConditions.length > 0) {
