@@ -14,7 +14,15 @@ async function getAllTags(req, res) {
 // GET /api/videos
 async function getVideos(req, res) {
     try {
-        const { search, tag } = req.query;
+        const { search, tag, tags } = req.query;
+
+        // Support both single-tag (?tag=Comedy) and multi-tag (?tags=Comedy,2024)
+        let selectedTags = [];
+        if (typeof tags === 'string' && tags.length > 0) {
+            selectedTags = tags.split(',').map((t) => t.trim()).filter(Boolean);
+        } else if (tag) {
+            selectedTags = [tag];
+        }
 
         let query = `
       SELECT v.*, u.full_name as uploader_name, GROUP_CONCAT(t.name) as tags
@@ -38,9 +46,12 @@ async function getVideos(req, res) {
 
         query += ` GROUP BY v.id`;
 
-        if (tag) {
-            query += ` HAVING FIND_IN_SET(?, tags)`;
-            params.push(tag);
+        // Tag filtering using GROUP_CONCAT result.
+        // If multiple tags are selected, require videos to contain *all* of them.
+        if (selectedTags.length > 0) {
+            const havingClauses = selectedTags.map(() => 'FIND_IN_SET(?, tags)');
+            query += ` HAVING ` + havingClauses.join(' AND ');
+            params.push(...selectedTags);
         }
 
         query += ` ORDER BY v.created_at DESC`;

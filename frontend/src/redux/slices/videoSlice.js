@@ -4,18 +4,41 @@ import axios from 'axios';
 const API_URL = 'http://localhost:5000/api/videos';
 
 // Fetch all videos
-export const fetchVideos = createAsyncThunk('videos/fetchAll', async ({ search = '', tag = '' } = {}, thunkAPI) => {
-    try {
-        let query = `?`;
-        if (search) query += `search=${search}&`;
-        if (tag) query += `tag=${tag}`;
+// Supports:
+// - search: string
+// - tag: single tag name
+// - tags: array of tag names (multi-select)
+export const fetchVideos = createAsyncThunk(
+    'videos/fetchAll',
+    async ({ search = '', tag = '', tags = [] } = {}, thunkAPI) => {
+        try {
+            const params = new URLSearchParams();
 
-        const response = await axios.get(`${API_URL}${query}`);
-        return response.data;
-    } catch (error) {
-        return thunkAPI.rejectWithValue(error.response.data);
+            if (search) {
+                params.append('search', search);
+            }
+
+            let selectedTags = [];
+            if (Array.isArray(tags) && tags.length > 0) {
+                selectedTags = tags;
+            } else if (tag) {
+                selectedTags = [tag];
+            }
+
+            if (selectedTags.length > 0) {
+                params.append('tags', selectedTags.join(','));
+            }
+
+            const queryString = params.toString();
+            const url = queryString ? `${API_URL}?${queryString}` : API_URL;
+
+            const response = await axios.get(url);
+            return response.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response?.data || 'Failed to fetch videos');
+        }
     }
-});
+);
 
 // Fetch single video
 export const fetchVideoById = createAsyncThunk('videos/fetchById', async (id, thunkAPI) => {

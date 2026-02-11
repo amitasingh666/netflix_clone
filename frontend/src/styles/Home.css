@@ -193,12 +193,14 @@
 /* --- Tag Filter --- */
 .tag-filter {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 30px;
     overflow-x: auto;
     padding-bottom: 10px;
     scrollbar-width: thin;
     scrollbar-color: #555 transparent;
+    align-items: center;
 }
 
 .tag-filter::-webkit-scrollbar {
@@ -208,6 +210,45 @@
 .tag-filter::-webkit-scrollbar-thumb {
     background: #555;
     border-radius: 4px;
+}
+
+.tag-filter__selected {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding-right: 10px;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    margin-right: 10px;
+}
+
+.tag-filter__selected-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #aaa;
+}
+
+.tag-filter__selected-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #e50914;
+    border: none;
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.tag-filter__selected-chip-text {
+    font-weight: 500;
+}
+
+.tag-filter__selected-chip-remove {
+    font-size: 0.9rem;
+    opacity: 0.8;
 }
 
 .tag-filter__btn {
@@ -244,6 +285,13 @@
 }
 
 .video-grid__loading {
+    color: #999;
+    font-size: 1rem;
+    padding: 40px 0;
+    text-align: center;
+}
+
+.video-grid__empty {
     color: #999;
     font-size: 1rem;
     padding: 40px 0;
