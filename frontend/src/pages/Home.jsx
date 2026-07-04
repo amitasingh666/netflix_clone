@@ -20,6 +20,11 @@ const Home = () => {
         dispatch(fetchTags());
     }, [dispatch]);
 
+    useEffect(() => {
+        dispatch(fetchVideos());
+        dispatch(fetchTags());
+    }, [dispatch]);
+
     return (
         <div className="home-page">
             <Navbar user={user} isAuthenticated={isAuthenticated} />
