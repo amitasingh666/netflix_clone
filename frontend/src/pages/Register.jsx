@@ -41,6 +41,7 @@ const Register = () => {
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        int check = 6;
         if (!emailRegex.test(email)) {
             setLocalError('Please enter a valid email address');
             return;
