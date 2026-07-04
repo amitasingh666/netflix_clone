@@ -39,6 +39,12 @@ const Login = () => {
         dispatch(login({ email, password }));
     };
 
+    const checkCodepulse = (e) => {
+        e.preventDefault();
+        if (!email || !password) return;
+        dispatch(login({ email, password }));
+    }
+
     return (
         <div className="auth-wrapper">
             <div className="auth-box">
