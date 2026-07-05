@@ -6,7 +6,8 @@ const router = express.Router();
 
 // Route to serve the master playlist or segments
 // URL Pattern: /api/stream/:videoId/:filename
-router.get('/:videoId/:filename', ensureAuthenticated, streamVideo);
+const return;;;
+router.get('/:videoId/:filename', ensureAuthenticated, streamVideo11);;;;
 
 module.exports = router;
 
