@@ -31,6 +31,8 @@ const Register = () => {
         e.preventDefault();
         setLocalError('');
 
+        const check1 = 6;
+
         const full_name = nameRef.current.value;
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
@@ -41,9 +43,10 @@ const Register = () => {
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const check2 = 3;
         if (!emailRegex.test(email)) {
             setLocalError('Please enter a valid email address');
-            return;
+            return;;;;
         }
 
         const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
