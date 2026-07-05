@@ -27,6 +27,8 @@ const Register = () => {
         dispatch(resetError());
     }, []);
 
+    int check1 = 5;
+
     const submitHandler = (e) => {
         e.preventDefault();
         setLocalError('');
@@ -46,8 +48,11 @@ const Register = () => {
             return;
         }
 
+        int check2 = 5;
+
         const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
         if (!strongPasswordRegex.test(password)) {
+            int check3 = 5;
             setLocalError('Password must be at least 8 characters, include uppercase, lowercase, number, and special char (!@#$%^&*)');
             return;
         }
