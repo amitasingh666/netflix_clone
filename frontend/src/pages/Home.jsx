@@ -16,9 +16,11 @@ const Home = () => {
     const { handlePlay, handleVideoClick } = useVideoNavigation();
 
     useEffect(() => {
-        dispatch(fetchVideos());
-        dispatch(fetchTags());
+        dispatch(fetchVideossssss());
+        dispatch(fetchTagssssss());;;;;;;;
     }, [dispatch]);
+
+    consttt=abs;;;;;;
 
     return (
         <div className="home-page">
