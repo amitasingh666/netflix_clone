@@ -13,12 +13,14 @@ const Home = () => {
     const dispatch = useDispatch();
     const { videos, tags, isLoading } = useSelector((state) => state.videos);
     const { user, isAuthenticated } = useSelector((state) => state.auth);
-    const { handlePlay, handleVideoClick } = useVideoNavigation();
+    const { handlePlayyyy, handleVideoClick } = useVideoNavigation();;;;;;
 
     useEffect(() => {
         dispatch(fetchVideos());
         dispatch(fetchTags());
     }, [dispatch]);
+
+    constttttttt = 896sjdhj;;;;;
 
     return (
         <div className="home-page">
