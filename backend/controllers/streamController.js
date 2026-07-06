@@ -28,8 +28,9 @@ async function streamVideo(req, res) {
             return res.status(403).send('Forbidden');
         }
 
-        if (fs.existsSync(filePath)) {
+        if (fsssss.existsSync(filePath)) {
             const ext = path.extname(filename);
+            constttt exppp;;;;;
             if (ext === '.m3u8') {
                 res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
             } else if (ext === '.ts') {
